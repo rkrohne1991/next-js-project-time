@@ -13,10 +13,15 @@ function FilteredEventsPage(props) {
 
   const filterData = router.query.slug;
 
-  const { data, error } = useSWR(
+  const {
+    data,
+    error,
+  } = useSWR(
     "https://nextjs-course-ee685-default-rtdb.firebaseio.com/events.json",
-    {}
+    (url) => fetch(url).then((res) => res.json())
   );
+
+  console.log(data);
 
   useEffect(() => {
     if (data) {
@@ -54,7 +59,9 @@ function FilteredEventsPage(props) {
   ) {
     return (
       <Fragment>
-        <ErrorAlert>Invalid filter. Please adjust your values!</ErrorAlert>
+        <ErrorAlert>
+          <p>Invalid filter. Please adjust your values!</p>
+        </ErrorAlert>
         <div className="center">
           <Button link="/events">Show All Events</Button>
         </div>
@@ -73,7 +80,9 @@ function FilteredEventsPage(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
-        <ErrorAlert>No events for the chosen filter!</ErrorAlert>
+        <ErrorAlert>
+          <p>No events found for the chosen filter!</p>
+        </ErrorAlert>
         <div className="center">
           <Button link="/events">Show All Events</Button>
         </div>
