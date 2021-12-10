@@ -41,7 +41,6 @@ function EventItem(props) {
           </Button>
         </div>
       </div>
-      {/* {props.description} */}
     </li>
   );
 }
